@@ -1,0 +1,19 @@
+{
+  "name": "impulsar_back_nuevo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MorenaLopezObejero/Impulsar_back_nuevo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MorenaLopezObejero/Impulsar_back_nuevo/issues"
+  },
+  "homepage": "https://github.com/MorenaLopezObejero/Impulsar_back_nuevo#readme"
+}
