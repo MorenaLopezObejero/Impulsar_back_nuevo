@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/MorenaLopezObejero/Impulsar_back_nuevo/issues"
   },
-  "homepage": "https://github.com/MorenaLopezObejero/Impulsar_back_nuevo#readme"
+  "homepage": "https://github.com/MorenaLopezObejero/Impulsar_back_nuevo#readme",
+  "dependencies": {
+    "@prisma/client": "^6.11.1"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "type": "commonjs"
 }
