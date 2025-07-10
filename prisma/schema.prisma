@@ -13,3 +13,22 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Typo_emprendimiento {
+  typo String @id
+  descripcion String
+  foto String?
+
+  rela_typo_prod Productos @relation(fields: [producto], references: [nombre])
+  producto String
+}
+
+model Productos {
+  nombre String @id
+  descripcion String
+  pasos String
+  herramientas String
+  foto String?
+
+  typo_emprendimiento Typo_emprendimiento []
+}
