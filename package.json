@@ -17,9 +17,14 @@
   },
   "homepage": "https://github.com/MorenaLopezObejero/Impulsar_back_nuevo#readme",
   "dependencies": {
-    "@prisma/client": "^6.11.1"
+    "@prisma/client": "^6.11.1",
+    "express": "^5.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.13",
+    "typescript": "^5.8.3"
+  },
   "keywords": [],
   "type": "commonjs"
 }
