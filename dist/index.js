@@ -23,3 +23,4 @@ app.listen(PORT, () => {
 app.get("/", (req, res) => {
     res.json({ message: "Funca" });
 });
+exports.default = app;

@@ -12,7 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getProductoService = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-const getProductoService = () => __awaiter(void 0, void 0, void 0, function* () {
-    return yield prisma.producto.findMany();
+const getProductoService = (Typo_emprendimientos) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield prisma.producto.findMany({
+        where: { Typo_emprendimientos }
+    });
 });
 exports.getProductoService = getProductoService;
