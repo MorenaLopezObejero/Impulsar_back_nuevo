@@ -19,8 +19,7 @@ model Typo_emprendimiento {
   descripcion String
   foto String?
 
-  rela_typo_prod Productos @relation(fields: [producto], references: [nombre])
-  producto String
+  producto Productos[]
 }
 
 model Productos {
@@ -30,5 +29,7 @@ model Productos {
   herramientas String
   foto String?
 
-  typo_emprendimiento Typo_emprendimiento []
+  rela_prod_typo Typo_emprendimiento @relation(fields: [typo], references: [typo])
+  typo String
+
 }

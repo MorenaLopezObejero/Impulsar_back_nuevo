@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 // Configuración express
 const app = (0, express_1.default)();
-const PORT = 8000;
+const PORT = 3000;
 // Middlewares
 const corsOptions = {
     origin: '*', // permitir acceso desde cualquier origen
@@ -17,10 +17,9 @@ const corsOptions = {
 app.use((0, cors_1.default)(corsOptions));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
-app.listen(PORT, () => {
-    console.log(`✅ Server is running on port ${PORT}`);
-});
 app.get("/", (req, res) => {
     res.json({ message: "Funca" });
 });
+const producto_routes_1 = __importDefault(require("./Routes/producto.routes"));
+app.use('/Producto', producto_routes_1.default);
 exports.default = app;

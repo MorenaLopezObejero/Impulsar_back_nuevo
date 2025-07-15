@@ -3,7 +3,7 @@ import cors from 'cors';
 
 // Configuración express
 const app = express()
-const PORT = 8000
+const PORT = 3000
 
 // Middlewares
 const corsOptions = {
@@ -15,12 +15,11 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.listen(PORT, () => {
-    console.log(`✅ Server is running on port ${PORT}`);
-})
-
 app.get("/", (req, res) => {
   res.json({ message: "Funca" });
 });
+
+import productoRoutes from './Routes/producto.routes';
+app.use('/Producto', productoRoutes);
 
 export default app;

@@ -1,9 +1,9 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '../generated/prisma/client'
 
 const prisma = new PrismaClient()
 
-export const getProductoService = async (Typo_emprendimientos: string) => {
-    return await prisma.producto.findMany({
-        where: {Typo_emprendimientos}
+export const getProductoService = async (typo_emprendimiento: string) => {
+    return await prisma.productos.findMany({
+        where: {typo_emprendimiento}
     });
 };
