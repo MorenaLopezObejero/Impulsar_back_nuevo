@@ -14,12 +14,34 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Usuario {
+  email String @id
+  contasena String
+  nombreUsu String
+  foto String?
+
+  emprendimiento Emprendimiento []
+}
+
+model Emprendimiento {
+  Id Int @id @default(autoincrement())
+  nombreEmp String
+  colores String?
+
+  rela_emp_usu Usuario @relation(fields: [usuario], references: [email])
+  usuario String
+
+  rela_emp_typoemp Typo_emprendimiento @relation(fields: [tipo], references: [typo])
+  tipo String
+}
+
 model Typo_emprendimiento {
   typo String @id
   descripcion String
   foto String?
 
   producto Productos[]
+  emprendimiento Emprendimiento[]
 }
 
 model Productos {
