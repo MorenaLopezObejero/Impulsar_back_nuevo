@@ -1,8 +1,7 @@
 import  express  from "express";
-import { getProducto } from "../Controllers/producto.controller";
+import { getProductobyTipo} from "../Controllers/producto.controller";
 
 const router = express.Router();
 
-router.get('/:Typo_emprendimiento', getProducto);
-
+router.get('/productoFull/:Typo_emprendimiento', getProductobyTipo);
 export default router;

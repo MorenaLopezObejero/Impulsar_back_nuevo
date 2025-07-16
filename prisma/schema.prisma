@@ -27,9 +27,8 @@ model Productos {
   descripcion String
   pasos String
   herramientas String
-  tipo String
   foto String?
 
   rela_prod_typo Typo_emprendimiento @relation(fields: [tipo], references: [typo])
-
+  tipo String
 }

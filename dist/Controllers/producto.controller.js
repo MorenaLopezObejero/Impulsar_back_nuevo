@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getProducto = void 0;
+exports.getProductobyTipo = void 0;
 const producto_service_1 = require("../Services/producto.service");
-const getProducto = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getProductobyTipo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const producto = yield (0, producto_service_1.getProductoService)(req.params.Typo_emprendimientos);
+        const producto = yield (0, producto_service_1.getProductobyTipoService)(req.params.Typo_emprendimientos);
         res.json(producto);
     }
     catch (err) {
@@ -21,4 +21,4 @@ const getProducto = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         throw err;
     }
 });
-exports.getProducto = getProducto;
+exports.getProductobyTipo = getProductobyTipo;

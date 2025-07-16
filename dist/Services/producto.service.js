@@ -9,14 +9,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getProductoService = void 0;
+exports.getProductobyTipoService = void 0;
 const client_1 = require("../../generated/prisma/client");
 const prisma = new client_1.PrismaClient();
-const getProductoService = (typo_emprendimiento) => __awaiter(void 0, void 0, void 0, function* () {
+const getProductobyTipoService = (tipo) => __awaiter(void 0, void 0, void 0, function* () {
     return yield prisma.productos.findMany({
-        where: {
-            tipo: "typo_emprendimiento"
-        }
+        where: { tipo }
     });
 });
-exports.getProductoService = getProductoService;
+exports.getProductobyTipoService = getProductobyTipoService;
+/* No sirve es para cordarme como hacer un select
+
+export const getProductoDescPaService = async (tipo: string) => {
+    return await prisma.productos.findMany({
+        where: { tipo },
+        select: {
+            nombre: true,
+            
+        }
+    });
+
+} */ 
