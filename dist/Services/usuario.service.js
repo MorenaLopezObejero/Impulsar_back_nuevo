@@ -9,15 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postUsuarioService = void 0;
+exports.postUsuarioService = exports.getUsuarioService = void 0;
 const client_1 = require("../../generated/prisma/client");
 const prisma = new client_1.PrismaClient();
-/*export const getUsuarioService = async (email: string) => {
-    return await prisma.usuario.findUnique({
+const getUsuarioService = (email) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield prisma.usuario.findUnique({
         where: { email }
     });
-};
-*/
+});
+exports.getUsuarioService = getUsuarioService;
 const postUsuarioService = (email, contasena, nombreUsu) => __awaiter(void 0, void 0, void 0, function* () {
     return yield prisma.usuario.create({
         data: {

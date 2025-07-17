@@ -13,7 +13,7 @@ exports.postUsuarioController = void 0;
 const usuario_service_1 = require("../Services/usuario.service");
 const postUsuarioController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const usuario = yield (0, usuario_service_1.postUsuarioService)(req.params.email, req.params.contasena, req.params.nombreUsu);
+        const usuario = yield (0, usuario_service_1.postUsuarioService)(req.body.email, req.body.contasena, req.body.nombreUsu);
         res.json(usuario);
     }
     catch (err) {

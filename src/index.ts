@@ -22,4 +22,7 @@ app.get("/", (req, res) => {
 import productoRoutes from './Routes/producto.routes';
 app.use('/Producto', productoRoutes);
 
+import usuarioRoutes from './Routes/usuario.routes';
+app.use('/Usuario', usuarioRoutes);
+
 export default app;
