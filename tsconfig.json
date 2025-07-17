@@ -104,6 +104,6 @@
   },
   "include": [
     "src/**/*"
-, "generated/prisma"  ],
+, "src/generated/prisma"  ],
   "exclude": []
 }

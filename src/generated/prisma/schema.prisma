@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  email     String  @id
+  contasena String
+  nombreUsu String
+  foto      String?
+
+  emprendimiento Emprendimiento[]
+}
+
+model Emprendimiento {
+  Id        Int     @id @default(autoincrement())
+  nombreEmp String
+  colores   String?
+
+  rela_emp_usu Usuario @relation(fields: [usuario], references: [email])
+  usuario      String
+
+  rela_emp_typoemp Typo_emprendimiento @relation(fields: [tipo], references: [typo])
+  tipo             String
+}
+
+model Typo_emprendimiento {
+  typo        String  @id
+  descripcion String
+  foto        String?
+
+  producto       Productos[]
+  emprendimiento Emprendimiento[]
+}
+
+model Productos {
+  nombre       String  @id
+  descripcion  String
+  pasos        String
+  herramientas String
+  foto         String?
+
+  rela_prod_typo Typo_emprendimiento @relation(fields: [tipo], references: [typo])
+  tipo           String
+
+  prod_mat Prod_Mat[]
+}
+
+model Prod_Mat {
+  Id Int @id @default(autoincrement())
+
+  rela_PyM Productos @relation(fields: [producto], references: [nombre])
+  producto String
+
+  rela_MyP   Materiales @relation(fields: [materiales], references: [nombreMat])
+  materiales String
+}
+
+model Materiales {
+  nombreMat String  @id
+  unidad    String
+  foto      String?
+
+  prod_mat Prod_Mat[]
+}
