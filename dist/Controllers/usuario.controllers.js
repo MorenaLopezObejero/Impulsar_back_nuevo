@@ -9,22 +9,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postUsuarioService = void 0;
-const client_1 = require("../../generated/prisma/client");
-const prisma = new client_1.PrismaClient();
-/*export const getUsuarioService = async (email: string) => {
-    return await prisma.usuario.findUnique({
-        where: { email }
-    });
-};
-*/
-const postUsuarioService = (email, contasena, nombreUsu) => __awaiter(void 0, void 0, void 0, function* () {
-    return yield prisma.usuario.create({
-        data: {
-            email,
-            contasena,
-            nombreUsu
-        }
-    });
+exports.postUsuarioController = void 0;
+const usuario_service_1 = require("../Services/usuario.service");
+const postUsuarioController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const usuario = yield (0, usuario_service_1.postUsuarioService)(req.params.email, req.params.contasena, req.params.nombreUsu);
+        res.json(usuario);
+    }
+    catch (err) {
+        res.status(500).json({ error: 'Error al crear Usuario' });
+        throw err;
+    }
 });
-exports.postUsuarioService = postUsuarioService;
+exports.postUsuarioController = postUsuarioController;
