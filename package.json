@@ -1,23 +1,25 @@
 {
   "name": "impulsar_back_nuevo",
   "version": "1.0.0",
-  "description": "",
   "main": "index.ts",
   "scripts": {
     "build": "rimraf dist && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node src/server"
+    "start": "ts-node src/server",
+     "dev": "ts-node src/server"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MorenaLopezObejero/Impulsar_back_nuevo.git"
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/MorenaLopezObejero/Impulsar_back_nuevo/issues"
+  "description": "",
+  "devDependencies": {
+    "@types/consola": "^1.0.0",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.13",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   },
-  "homepage": "https://github.com/MorenaLopezObejero/Impulsar_back_nuevo#readme",
   "dependencies": {
     "@prisma/client": "^6.11.1",
     "@types/cors": "^2.8.19",
@@ -28,14 +30,5 @@
     "prisma": "^6.12.0",
     "rimraf": "^6.0.1"
   },
-  "devDependencies": {
-    "@types/consola": "^1.0.0",
-    "@types/dotenv": "^6.1.1",
-    "@types/express": "^5.0.3",
-    "@types/node": "^24.0.13",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
-  },
-  "keywords": [],
   "type": "commonjs"
 }
