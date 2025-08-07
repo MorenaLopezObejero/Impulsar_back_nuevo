@@ -1,5 +1,5 @@
 import { error } from "console";
-import { getProductobyTipoService} from "../Services/producto.service";
+import { getProductobyTipoService, getMaterialesbyProducto} from "../Services/producto.service";
 import { Request, Response } from 'express';
 
 export const getProductobyTipo = async (req:Request, res:Response) => {
@@ -12,3 +12,9 @@ export const getProductobyTipo = async (req:Request, res:Response) => {
     }
 };
 
+/*export const getMaterialbyProducto = async (req: Request, res: Response) => {
+    try {
+        const 
+    }
+}
+*/
