@@ -11,3 +11,4 @@ export const getProductobyTipo = async (req:Request, res:Response) => {
         throw err;
     }
 };
+
