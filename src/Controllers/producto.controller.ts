@@ -1,8 +1,8 @@
 import { error } from "console";
-import { getProductobyTipoService, getMaterialesbyProducto} from "../Services/producto.service";
+import { getProductobyTipoService, getMaterialesbyProductoService} from "../Services/producto.service";
 import { Request, Response } from 'express';
 
-export const getProductobyTipo = async (req:Request, res:Response) => {
+export const getProductobyTipoController = async (req:Request, res:Response) => {
     try {
         const producto = await getProductobyTipoService(req.params.Typo_emprendimientos);
         res.json(producto);
@@ -12,9 +12,12 @@ export const getProductobyTipo = async (req:Request, res:Response) => {
     }
 };
 
-/*export const getMaterialbyProducto = async (req: Request, res: Response) => {
+export const getMaterialbyProductoController = async (req: Request, res: Response) => {
     try {
-        const 
+        const producto = await getMaterialesbyProductoService(req.params.producto);
+        res.json(producto)
+    } catch (err){
+        res.status(500).json({error: 'Error al obtener materiales'});
+        throw err;
     }
 }
-*/

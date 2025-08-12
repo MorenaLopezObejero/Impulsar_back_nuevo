@@ -9,10 +9,10 @@ export const getProductobyTipoService = async (tipo: string) => {
     });
 };
 
-export async function getMaterialesbyProducto(nombreProducto: string) {
+export async function getMaterialesbyProductoService(producto: string) {
     const relaciones = await prisma.prod_Mat.findMany({
         where: {
-            producto: nombreProducto,
+            producto,
         },
         include: {
             rela_MyP: true,
