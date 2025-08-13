@@ -74,3 +74,16 @@ model Materiales {
 
   prod_mat Prod_Mat []
 }
+
+model Contactos {
+  Id Int @id @default(autoincrement())
+  propietario String
+  nombre String? 
+  email String?
+  telefono Int?
+  redes_soc String?
+  notas_perz String?
+  foto String?
+
+  
+}

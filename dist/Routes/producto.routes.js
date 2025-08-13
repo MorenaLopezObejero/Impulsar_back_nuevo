@@ -6,5 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const producto_controller_1 = require("../Controllers/producto.controller");
 const router = express_1.default.Router();
-router.get('/productoFull/:Typo_emprendimiento', producto_controller_1.getProductobyTipo);
+router.get('/productoFull/:Typo_emprendimiento', producto_controller_1.getProductobyTipoController);
+router.get('/materialByproducto/:producto', producto_controller_1.getMaterialbyProductoController);
 exports.default = router;

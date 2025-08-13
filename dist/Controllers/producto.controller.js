@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getProductobyTipo = void 0;
+exports.getMaterialbyProductoController = exports.getProductobyTipoController = void 0;
 const producto_service_1 = require("../Services/producto.service");
-const getProductobyTipo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getProductobyTipoController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const producto = yield (0, producto_service_1.getProductobyTipoService)(req.params.Typo_emprendimientos);
         res.json(producto);
@@ -21,4 +21,15 @@ const getProductobyTipo = (req, res) => __awaiter(void 0, void 0, void 0, functi
         throw err;
     }
 });
-exports.getProductobyTipo = getProductobyTipo;
+exports.getProductobyTipoController = getProductobyTipoController;
+const getMaterialbyProductoController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const producto = yield (0, producto_service_1.getMaterialesbyProductoService)(req.params.producto);
+        res.json(producto);
+    }
+    catch (err) {
+        res.status(500).json({ error: 'Error al obtener materiales' });
+        throw err;
+    }
+});
+exports.getMaterialbyProductoController = getMaterialbyProductoController;
