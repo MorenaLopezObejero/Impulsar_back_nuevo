@@ -21,6 +21,7 @@ model Usuario {
   foto String?
 
   emprendimiento Emprendimiento []
+  contactos Contactos[]
 }
 
 model Emprendimiento {
@@ -77,7 +78,6 @@ model Materiales {
 
 model Contactos {
   Id Int @id @default(autoincrement())
-  propietario String
   nombre String? 
   email String?
   telefono Int?
@@ -85,5 +85,6 @@ model Contactos {
   notas_perz String?
   foto String?
 
-  
+  propietario Usuario @relation(fields: [host], references: [email])
+  host String
 }
