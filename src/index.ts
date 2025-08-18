@@ -25,4 +25,7 @@ app.use('/Producto', productoRoutes);
 import usuarioRoutes from './Routes/usuario.routes';
 app.use('/Usuario', usuarioRoutes);
 
+import contactosRoutes from './Routes/contactos.routes';
+app.use('/Contactos', contactosRoutes);
+
 export default app;

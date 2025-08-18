@@ -24,4 +24,6 @@ const producto_routes_1 = __importDefault(require("./Routes/producto.routes"));
 app.use('/Producto', producto_routes_1.default);
 const usuario_routes_1 = __importDefault(require("./Routes/usuario.routes"));
 app.use('/Usuario', usuario_routes_1.default);
+const contactos_routes_1 = __importDefault(require("./Routes/contactos.routes"));
+app.use('/Contactos', contactos_routes_1.default);
 exports.default = app;
