@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client"
 
 const prisma = new PrismaClient()
 
-export async function getContactobyUsuarioService(host:string) {
+export async function getContactobyHostService(host:string) {
     return await prisma.contactos.findMany({
         where:{host},
         include:{

@@ -1,11 +1,12 @@
 import { error } from "console";
-import { getContactobyUsuarioService} from "../Services/contactos.service";
+import { getContactobyHostService} from "../Services/contactos.service";
 import { Request, Response } from 'express';
 
-export const getContactobyUsuarioController = async (req:Request, res:Response) => {
+export const getContactobyHostController = async (req:Request, res:Response) => {
     try{
-        const contactos = await getContactobyUsuarioService("HOST")
-        res.json(contactos);
+        const contactosDefault = await getContactobyHostService("HOST")
+        const contactos = await getContactobyHostService(req.body.host)
+        res.json({contactosDefault, contactos})
     } catch (err){
         res.status(500).json({error: 'Error al obtener Contactos'});
         throw err;

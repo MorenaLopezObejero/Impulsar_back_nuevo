@@ -76,6 +76,15 @@ model Materiales {
   prod_mat Prod_Mat []
 }
 
+/*model Materiales_CyS {
+  Id Int @id @default(autoincrement())
+  costo String
+  stock Int
+
+  rela_Mat  Materiales @relation(fields: [materiales], references: [nombreMat])
+  materiales String
+}*/
+
 model Contactos {
   Id Int @id @default(autoincrement())
   nombre String? 

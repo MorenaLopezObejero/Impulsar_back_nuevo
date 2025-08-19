@@ -1,8 +1,8 @@
 import  express  from "express";
-import {getContactobyUsuarioController } from "../Controllers/contactos.controllers";
+import {getContactobyHostController } from "../Controllers/contactos.controllers";
 
 const router = express.Router();
 
-router.get('/contactobyPropietario', getContactobyUsuarioController);
+router.get('/contactobyPropietario', getContactobyHostController);
 
 export default router;
