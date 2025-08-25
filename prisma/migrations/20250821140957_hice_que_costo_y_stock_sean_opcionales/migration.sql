@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "Materiales_CyS" ALTER COLUMN "costo" DROP NOT NULL,
+ALTER COLUMN "stock" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "Productos_CyS" ALTER COLUMN "costo" DROP NOT NULL,
+ALTER COLUMN "stock" DROP NOT NULL;

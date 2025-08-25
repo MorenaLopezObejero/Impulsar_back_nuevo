@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getContactobyUsuarioService = getContactobyUsuarioService;
+exports.getContactobyHostService = getContactobyHostService;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-function getContactobyUsuarioService(host) {
+function getContactobyHostService(host) {
     return __awaiter(this, void 0, void 0, function* () {
         return yield prisma.contactos.findMany({
             where: { host },
