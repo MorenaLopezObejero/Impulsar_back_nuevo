@@ -28,4 +28,7 @@ app.use('/Usuario', usuarioRoutes);
 import contactosRoutes from './Routes/contactos.routes';
 app.use('/Contactos', contactosRoutes);
 
+import materiales_CySRoutes from './Routes/materiales_cys.routes';
+app.use('/Materiales_CyS', materiales_CySRoutes);
+
 export default app;

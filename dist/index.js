@@ -26,4 +26,6 @@ const usuario_routes_1 = __importDefault(require("./Routes/usuario.routes"));
 app.use('/Usuario', usuario_routes_1.default);
 const contactos_routes_1 = __importDefault(require("./Routes/contactos.routes"));
 app.use('/Contactos', contactos_routes_1.default);
+const materiales_cys_routes_1 = __importDefault(require("./Routes/materiales_cys.routes"));
+app.use('/Materiales_CyS', materiales_cys_routes_1.default);
 exports.default = app;
