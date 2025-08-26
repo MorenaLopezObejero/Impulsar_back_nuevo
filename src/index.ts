@@ -31,4 +31,7 @@ app.use('/Contactos', contactosRoutes);
 import materiales_CySRoutes from './Routes/materiales_cys.routes';
 app.use('/Materiales_CyS', materiales_CySRoutes);
 
+import productos_CySRoutes from './Routes/productos_cys.routes';
+app.use('/Productos_CyS', productos_CySRoutes);
+
 export default app;
