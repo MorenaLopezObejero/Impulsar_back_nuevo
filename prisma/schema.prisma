@@ -106,7 +106,7 @@ model Materiales_CyS {
 
 model Contactos {
   Id Int @id @default(autoincrement())
-  nombre String? 
+  nombre String
   email String?
   telefono Int?
   redes_soc String?

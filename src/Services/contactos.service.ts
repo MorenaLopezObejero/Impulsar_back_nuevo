@@ -11,10 +11,23 @@ export async function getContactobyHostService(host:string) {
     })
 }
 
-/*
-export async function getContactobyUsuario(host: string){
-    const resultado = await prisma.Contactos.findMany({
-        
+export const postContactosByUsuarioService = async (nombre: string, host:string) => {
+    return await prisma.contactos.create({
+        data: {
+            nombre,
+            host
+        }
     })
-    return resultado
+}
+
+/*
+export const postUsuarioService = async (email: string, contasena: string, nombreUsu: string) => {
+    return await prisma.usuario.create({
+        data: {
+            email, 
+            contasena, 
+            nombreUsu
+        }
+    }) 
+}
 */

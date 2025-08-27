@@ -22,10 +22,12 @@ function getContactobyHostService(host) {
         });
     });
 }
-/*
-export async function getContactobyUsuario(host: string){
-    const resultado = await prisma.Contactos.findMany({
-        
-    })
-    return resultado
+/*export const postContactosByUsuarioService = async ()
+
+
+export const getMaterial_CySByEmpService = async (emprendimiento: number) => {
+    return await prisma.materiales_CyS.findMany({
+        where: {emprendimiento}
+    });
+};
 */ 
