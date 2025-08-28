@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.postContactosByUsuarioService = void 0;
 exports.getContactobyHostService = getContactobyHostService;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
@@ -22,12 +23,23 @@ function getContactobyHostService(host) {
         });
     });
 }
-/*export const postContactosByUsuarioService = async ()
-
-
-export const getMaterial_CySByEmpService = async (emprendimiento: number) => {
-    return await prisma.materiales_CyS.findMany({
-        where: {emprendimiento}
+const postContactosByUsuarioService = (nombre, host) => __awaiter(void 0, void 0, void 0, function* () {
+    return yield prisma.contactos.create({
+        data: {
+            nombre,
+            host
+        }
     });
-};
+});
+exports.postContactosByUsuarioService = postContactosByUsuarioService;
+/*
+export const postUsuarioService = async (email: string, contasena: string, nombreUsu: string) => {
+    return await prisma.usuario.create({
+        data: {
+            email,
+            contasena,
+            nombreUsu
+        }
+    })
+}
 */ 

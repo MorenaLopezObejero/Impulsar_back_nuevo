@@ -7,4 +7,5 @@ const express_1 = __importDefault(require("express"));
 const contactos_controllers_1 = require("../Controllers/contactos.controllers");
 const router = express_1.default.Router();
 router.get('/contactobyPropietario', contactos_controllers_1.getContactobyHostController);
+router.post('/contactobyUsuario', contactos_controllers_1.postContactobyUsuarioController);
 exports.default = router;
