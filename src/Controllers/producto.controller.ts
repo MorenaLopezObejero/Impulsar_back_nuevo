@@ -1,6 +1,5 @@
 import { error } from "console";
-import { getProductobyTipoService, getMaterialesbyProductoService, getProductByNameService } from "../Services/producto.service";
-import { Request, Response } from 'express';
+import { getProductobyTipoService, getMaterialesbyProductoService, getProductByNameService, getAllProductsForCatalogService } from "../Services/producto.service";import { Request, Response } from 'express';
 
 export const getProductobyTipoController = async (req:Request, res:Response) => {
     try {
@@ -35,6 +34,15 @@ export const getProductByNameController = async (req: Request<{ nombre: string }
         }
     } catch (err) {
         console.error("--- ¡ERROR AL BUSCAR PRODUCTO POR NOMBRE! ---", err);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};
+export const getAllProductsForCatalogController = async (req: Request, res: Response) => {
+    try {
+        const catalogo = await getAllProductsForCatalogService();
+        res.json(catalogo);
+    } catch (err) {
+        console.error("--- ¡ERROR AL OBTENER EL CATÁLOGO DE PRODUCTOS! ---", err);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
 };

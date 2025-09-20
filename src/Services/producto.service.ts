@@ -50,3 +50,6 @@ export const getProductByNameService = async (nombre: string) => {
         },
     });
 };
+export const getAllProductsForCatalogService = async () => {
+    return await prisma.productos.findMany();
+};
