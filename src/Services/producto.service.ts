@@ -43,3 +43,10 @@ export const getProductoDescPaService = async (tipo: string) => {
     });
 
 } */
+export const getProductByNameService = async (nombre: string) => {
+    return await prisma.productos.findUnique({
+        where: {
+            nombre: nombre,
+        },
+    });
+};
