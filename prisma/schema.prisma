@@ -75,6 +75,7 @@ model Productos_CyS {
 }
 model Prod_Mat {
   Id Int @id @default(autoincrement())
+  cantidad String
   
   rela_PyM Productos @relation(fields: [producto], references: [nombre])
   producto String
