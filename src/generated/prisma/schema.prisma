@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -21,6 +21,7 @@ model Usuario {
   foto      String?
 
   emprendimiento Emprendimiento[]
+  contactos      Contactos[]
 }
 
 model Emprendimiento {
@@ -33,6 +34,9 @@ model Emprendimiento {
 
   rela_emp_typoemp Typo_emprendimiento @relation(fields: [tipo], references: [typo])
   tipo             String
+
+  material_CyS Materiales_CyS[]
+  producto_CyS Productos_CyS[]
 }
 
 model Typo_emprendimiento {
@@ -54,11 +58,25 @@ model Productos {
   rela_prod_typo Typo_emprendimiento @relation(fields: [tipo], references: [typo])
   tipo           String
 
-  prod_mat Prod_Mat[]
+  prod_mat     Prod_Mat[]
+  producto_CyS Productos_CyS[]
+}
+
+model Productos_CyS {
+  Id    Int     @id @default(autoincrement())
+  costo String?
+  stock Int?
+
+  rela_Prod Productos @relation(fields: [producto], references: [nombre])
+  producto  String
+
+  rela_Emp       Emprendimiento @relation(fields: [emprendimiento], references: [Id])
+  emprendimiento Int
 }
 
 model Prod_Mat {
-  Id Int @id @default(autoincrement())
+  Id       Int    @id @default(autoincrement())
+  cantidad String
 
   rela_PyM Productos @relation(fields: [producto], references: [nombre])
   producto String
@@ -72,5 +90,31 @@ model Materiales {
   unidad    String
   foto      String?
 
-  prod_mat Prod_Mat[]
+  prod_mat       Prod_Mat[]
+  materiales_CyS Materiales_CyS[]
+}
+
+model Materiales_CyS {
+  Id    Int     @id @default(autoincrement())
+  costo String?
+  stock Int?
+
+  rela_Mat   Materiales @relation(fields: [materiales], references: [nombreMat])
+  materiales String
+
+  rela_Emp       Emprendimiento @relation(fields: [emprendimiento], references: [Id])
+  emprendimiento Int
+}
+
+model Contactos {
+  Id         Int     @id @default(autoincrement())
+  nombre     String
+  email      String?
+  telefono   Int?
+  redes_soc  String?
+  notas_perz String?
+  foto       String?
+
+  propietario Usuario @relation(fields: [host], references: [email])
+  host        String
 }

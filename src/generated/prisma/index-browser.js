@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.12.0
- * Query Engine version: 8047c96bbd92db98a2abc7c9323ce77c02c89dbc
+ * Prisma Client JS version: 6.18.0
+ * Query Engine version: 34b5a692b7bd79939a9a2c3ef97d816e749cda2f
  */
 Prisma.prismaVersion = {
-  client: "6.12.0",
-  engine: "8047c96bbd92db98a2abc7c9323ce77c02c89dbc"
+  client: "6.18.0",
+  engine: "34b5a692b7bd79939a9a2c3ef97d816e749cda2f"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -150,8 +150,17 @@ exports.Prisma.ProductosScalarFieldEnum = {
   tipo: 'tipo'
 };
 
+exports.Prisma.Productos_CySScalarFieldEnum = {
+  Id: 'Id',
+  costo: 'costo',
+  stock: 'stock',
+  producto: 'producto',
+  emprendimiento: 'emprendimiento'
+};
+
 exports.Prisma.Prod_MatScalarFieldEnum = {
   Id: 'Id',
+  cantidad: 'cantidad',
   producto: 'producto',
   materiales: 'materiales'
 };
@@ -160,6 +169,25 @@ exports.Prisma.MaterialesScalarFieldEnum = {
   nombreMat: 'nombreMat',
   unidad: 'unidad',
   foto: 'foto'
+};
+
+exports.Prisma.Materiales_CySScalarFieldEnum = {
+  Id: 'Id',
+  costo: 'costo',
+  stock: 'stock',
+  materiales: 'materiales',
+  emprendimiento: 'emprendimiento'
+};
+
+exports.Prisma.ContactosScalarFieldEnum = {
+  Id: 'Id',
+  nombre: 'nombre',
+  email: 'email',
+  telefono: 'telefono',
+  redes_soc: 'redes_soc',
+  notas_perz: 'notas_perz',
+  foto: 'foto',
+  host: 'host'
 };
 
 exports.Prisma.SortOrder = {
@@ -183,8 +211,11 @@ exports.Prisma.ModelName = {
   Emprendimiento: 'Emprendimiento',
   Typo_emprendimiento: 'Typo_emprendimiento',
   Productos: 'Productos',
+  Productos_CyS: 'Productos_CyS',
   Prod_Mat: 'Prod_Mat',
-  Materiales: 'Materiales'
+  Materiales: 'Materiales',
+  Materiales_CyS: 'Materiales_CyS',
+  Contactos: 'Contactos'
 };
 
 /**

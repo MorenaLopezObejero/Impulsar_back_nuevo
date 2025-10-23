@@ -5,13 +5,28 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 
 const {
+  PrismaClientKnownRequestError,
+  PrismaClientUnknownRequestError,
+  PrismaClientRustPanicError,
+  PrismaClientInitializationError,
+  PrismaClientValidationError,
+  getPrismaClient,
+  sqltag,
+  empty,
+  join,
+  raw,
+  skip,
   Decimal,
+  Debug,
   objectEnumValues,
   makeStrictEnum,
+  Extensions,
+  warnOnce,
+  defineDmmfProperty,
   Public,
   getRuntime,
-  skip
-} = require('./runtime/index-browser.js')
+  createParam,
+} = require('./runtime/wasm-engine-edge.js')
 
 
 const Prisma = {}
@@ -20,79 +35,35 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.12.0
- * Query Engine version: 8047c96bbd92db98a2abc7c9323ce77c02c89dbc
+ * Prisma Client JS version: 6.18.0
+ * Query Engine version: 34b5a692b7bd79939a9a2c3ef97d816e749cda2f
  */
 Prisma.prismaVersion = {
-  client: "6.12.0",
-  engine: "8047c96bbd92db98a2abc7c9323ce77c02c89dbc"
+  client: "6.18.0",
+  engine: "34b5a692b7bd79939a9a2c3ef97d816e749cda2f"
 }
 
-Prisma.PrismaClientKnownRequestError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`PrismaClientKnownRequestError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)};
-Prisma.PrismaClientUnknownRequestError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`PrismaClientUnknownRequestError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.PrismaClientRustPanicError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`PrismaClientRustPanicError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.PrismaClientInitializationError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`PrismaClientInitializationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.PrismaClientValidationError = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`PrismaClientValidationError is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
+Prisma.PrismaClientUnknownRequestError = PrismaClientUnknownRequestError
+Prisma.PrismaClientRustPanicError = PrismaClientRustPanicError
+Prisma.PrismaClientInitializationError = PrismaClientInitializationError
+Prisma.PrismaClientValidationError = PrismaClientValidationError
 Prisma.Decimal = Decimal
 
 /**
  * Re-export of sql-template-tag
  */
-Prisma.sql = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`sqltag is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.empty = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`empty is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.join = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`join is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.raw = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`raw is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+Prisma.sql = sqltag
+Prisma.empty = empty
+Prisma.join = join
+Prisma.raw = raw
 Prisma.validator = Public.validator
 
 /**
 * Extensions
 */
-Prisma.getExtensionContext = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`Extensions.getExtensionContext is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
-Prisma.defineExtension = () => {
-  const runtimeName = getRuntime().prettyName;
-  throw new Error(`Extensions.defineExtension is unable to run in this browser environment, or has been bundled for the browser (running in ${runtimeName}).
-In case this error is unexpected for you, please report it in https://pris.ly/prisma-prisma-bug-report`,
-)}
+Prisma.getExtensionContext = Extensions.getExtensionContext
+Prisma.defineExtension = Extensions.defineExtension
 
 /**
  * Shorthand utilities for JSON filtering
@@ -109,10 +80,11 @@ Prisma.NullTypes = {
 
 
 
+
+
 /**
  * Enums
  */
-
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   ReadUncommitted: 'ReadUncommitted',
   ReadCommitted: 'ReadCommitted',
@@ -150,8 +122,17 @@ exports.Prisma.ProductosScalarFieldEnum = {
   tipo: 'tipo'
 };
 
+exports.Prisma.Productos_CySScalarFieldEnum = {
+  Id: 'Id',
+  costo: 'costo',
+  stock: 'stock',
+  producto: 'producto',
+  emprendimiento: 'emprendimiento'
+};
+
 exports.Prisma.Prod_MatScalarFieldEnum = {
   Id: 'Id',
+  cantidad: 'cantidad',
   producto: 'producto',
   materiales: 'materiales'
 };
@@ -160,6 +141,25 @@ exports.Prisma.MaterialesScalarFieldEnum = {
   nombreMat: 'nombreMat',
   unidad: 'unidad',
   foto: 'foto'
+};
+
+exports.Prisma.Materiales_CySScalarFieldEnum = {
+  Id: 'Id',
+  costo: 'costo',
+  stock: 'stock',
+  materiales: 'materiales',
+  emprendimiento: 'emprendimiento'
+};
+
+exports.Prisma.ContactosScalarFieldEnum = {
+  Id: 'Id',
+  nombre: 'nombre',
+  email: 'email',
+  telefono: 'telefono',
+  redes_soc: 'redes_soc',
+  notas_perz: 'notas_perz',
+  foto: 'foto',
+  host: 'host'
 };
 
 exports.Prisma.SortOrder = {
@@ -183,37 +183,89 @@ exports.Prisma.ModelName = {
   Emprendimiento: 'Emprendimiento',
   Typo_emprendimiento: 'Typo_emprendimiento',
   Productos: 'Productos',
+  Productos_CyS: 'Productos_CyS',
   Prod_Mat: 'Prod_Mat',
-  Materiales: 'Materiales'
+  Materiales: 'Materiales',
+  Materiales_CyS: 'Materiales_CyS',
+  Contactos: 'Contactos'
 };
-
 /**
- * This is a stub Prisma Client that will error at runtime if called.
+ * Create the Client
  */
-class PrismaClient {
-  constructor() {
-    return new Proxy(this, {
-      get(target, prop) {
-        let message
-        const runtime = getRuntime()
-        if (runtime.isEdge) {
-          message = `PrismaClient is not configured to run in ${runtime.prettyName}. In order to run Prisma Client on edge runtime, either:
-- Use Prisma Accelerate: https://pris.ly/d/accelerate
-- Use Driver Adapters: https://pris.ly/d/driver-adapters
-`;
-        } else {
-          message = 'PrismaClient is unable to run in this browser environment, or has been bundled for the browser (running in `' + runtime.prettyName + '`).'
-        }
-
-        message += `
-If this is unexpected, please open an issue: https://pris.ly/prisma-prisma-bug-report`
-
-        throw new Error(message)
+const config = {
+  "generator": {
+    "name": "client",
+    "provider": {
+      "fromEnvVar": null,
+      "value": "prisma-client-js"
+    },
+    "output": {
+      "value": "C:\\Users\\Star\\Documents\\GitHub\\Impulsar_back_nuevo\\src\\generated\\prisma",
+      "fromEnvVar": null
+    },
+    "config": {
+      "engineType": "library"
+    },
+    "binaryTargets": [
+      {
+        "fromEnvVar": null,
+        "value": "windows",
+        "native": true
       }
-    })
+    ],
+    "previewFeatures": [],
+    "sourceFilePath": "C:\\Users\\Star\\Documents\\GitHub\\Impulsar_back_nuevo\\prisma\\schema.prisma",
+    "isCustomOutput": true
+  },
+  "relativeEnvPaths": {
+    "rootEnvPath": null,
+    "schemaEnvPath": "../../../.env"
+  },
+  "relativePath": "../../../prisma",
+  "clientVersion": "6.18.0",
+  "engineVersion": "34b5a692b7bd79939a9a2c3ef97d816e749cda2f",
+  "datasourceNames": [
+    "db"
+  ],
+  "activeProvider": "postgresql",
+  "postinstall": false,
+  "inlineDatasources": {
+    "db": {
+      "url": {
+        "fromEnvVar": "DATABASE_URL",
+        "value": null
+      }
+    }
+  },
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Usuario {\n  email     String  @id\n  contasena String\n  nombreUsu String\n  foto      String?\n\n  emprendimiento Emprendimiento[]\n  contactos      Contactos[]\n}\n\nmodel Emprendimiento {\n  Id        Int     @id @default(autoincrement())\n  nombreEmp String\n  colores   String?\n\n  rela_emp_usu Usuario @relation(fields: [usuario], references: [email])\n  usuario      String\n\n  rela_emp_typoemp Typo_emprendimiento @relation(fields: [tipo], references: [typo])\n  tipo             String\n\n  material_CyS Materiales_CyS[]\n  producto_CyS Productos_CyS[]\n}\n\nmodel Typo_emprendimiento {\n  typo        String  @id\n  descripcion String\n  foto        String?\n\n  producto       Productos[]\n  emprendimiento Emprendimiento[]\n}\n\nmodel Productos {\n  nombre       String  @id\n  descripcion  String\n  pasos        String\n  herramientas String\n  foto         String?\n\n  rela_prod_typo Typo_emprendimiento @relation(fields: [tipo], references: [typo])\n  tipo           String\n\n  prod_mat     Prod_Mat[]\n  producto_CyS Productos_CyS[]\n}\n\nmodel Productos_CyS {\n  Id    Int     @id @default(autoincrement())\n  costo String?\n  stock Int?\n\n  rela_Prod Productos @relation(fields: [producto], references: [nombre])\n  producto  String\n\n  rela_Emp       Emprendimiento @relation(fields: [emprendimiento], references: [Id])\n  emprendimiento Int\n}\n\nmodel Prod_Mat {\n  Id       Int    @id @default(autoincrement())\n  cantidad String\n\n  rela_PyM Productos @relation(fields: [producto], references: [nombre])\n  producto String\n\n  rela_MyP   Materiales @relation(fields: [materiales], references: [nombreMat])\n  materiales String\n}\n\nmodel Materiales {\n  nombreMat String  @id\n  unidad    String\n  foto      String?\n\n  prod_mat       Prod_Mat[]\n  materiales_CyS Materiales_CyS[]\n}\n\nmodel Materiales_CyS {\n  Id    Int     @id @default(autoincrement())\n  costo String?\n  stock Int?\n\n  rela_Mat   Materiales @relation(fields: [materiales], references: [nombreMat])\n  materiales String\n\n  rela_Emp       Emprendimiento @relation(fields: [emprendimiento], references: [Id])\n  emprendimiento Int\n}\n\nmodel Contactos {\n  Id         Int     @id @default(autoincrement())\n  nombre     String\n  email      String?\n  telefono   Int?\n  redes_soc  String?\n  notas_perz String?\n  foto       String?\n\n  propietario Usuario @relation(fields: [host], references: [email])\n  host        String\n}\n",
+  "inlineSchemaHash": "37bc387387fe890b29152e4096d94424daec38d4495de6dabe0e5b570f2cdf99",
+  "copyEngine": true
+}
+config.dirname = '/'
+
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Usuario\":{\"fields\":[{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"contasena\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nombreUsu\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"emprendimiento\",\"kind\":\"object\",\"type\":\"Emprendimiento\",\"relationName\":\"EmprendimientoToUsuario\"},{\"name\":\"contactos\",\"kind\":\"object\",\"type\":\"Contactos\",\"relationName\":\"ContactosToUsuario\"}],\"dbName\":null},\"Emprendimiento\":{\"fields\":[{\"name\":\"Id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"nombreEmp\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"colores\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rela_emp_usu\",\"kind\":\"object\",\"type\":\"Usuario\",\"relationName\":\"EmprendimientoToUsuario\"},{\"name\":\"usuario\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rela_emp_typoemp\",\"kind\":\"object\",\"type\":\"Typo_emprendimiento\",\"relationName\":\"EmprendimientoToTypo_emprendimiento\"},{\"name\":\"tipo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"material_CyS\",\"kind\":\"object\",\"type\":\"Materiales_CyS\",\"relationName\":\"EmprendimientoToMateriales_CyS\"},{\"name\":\"producto_CyS\",\"kind\":\"object\",\"type\":\"Productos_CyS\",\"relationName\":\"EmprendimientoToProductos_CyS\"}],\"dbName\":null},\"Typo_emprendimiento\":{\"fields\":[{\"name\":\"typo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"descripcion\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"producto\",\"kind\":\"object\",\"type\":\"Productos\",\"relationName\":\"ProductosToTypo_emprendimiento\"},{\"name\":\"emprendimiento\",\"kind\":\"object\",\"type\":\"Emprendimiento\",\"relationName\":\"EmprendimientoToTypo_emprendimiento\"}],\"dbName\":null},\"Productos\":{\"fields\":[{\"name\":\"nombre\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"descripcion\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"pasos\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"herramientas\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rela_prod_typo\",\"kind\":\"object\",\"type\":\"Typo_emprendimiento\",\"relationName\":\"ProductosToTypo_emprendimiento\"},{\"name\":\"tipo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"prod_mat\",\"kind\":\"object\",\"type\":\"Prod_Mat\",\"relationName\":\"Prod_MatToProductos\"},{\"name\":\"producto_CyS\",\"kind\":\"object\",\"type\":\"Productos_CyS\",\"relationName\":\"ProductosToProductos_CyS\"}],\"dbName\":null},\"Productos_CyS\":{\"fields\":[{\"name\":\"Id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"costo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"stock\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"rela_Prod\",\"kind\":\"object\",\"type\":\"Productos\",\"relationName\":\"ProductosToProductos_CyS\"},{\"name\":\"producto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rela_Emp\",\"kind\":\"object\",\"type\":\"Emprendimiento\",\"relationName\":\"EmprendimientoToProductos_CyS\"},{\"name\":\"emprendimiento\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null},\"Prod_Mat\":{\"fields\":[{\"name\":\"Id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"cantidad\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rela_PyM\",\"kind\":\"object\",\"type\":\"Productos\",\"relationName\":\"Prod_MatToProductos\"},{\"name\":\"producto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rela_MyP\",\"kind\":\"object\",\"type\":\"Materiales\",\"relationName\":\"MaterialesToProd_Mat\"},{\"name\":\"materiales\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Materiales\":{\"fields\":[{\"name\":\"nombreMat\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"unidad\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"prod_mat\",\"kind\":\"object\",\"type\":\"Prod_Mat\",\"relationName\":\"MaterialesToProd_Mat\"},{\"name\":\"materiales_CyS\",\"kind\":\"object\",\"type\":\"Materiales_CyS\",\"relationName\":\"MaterialesToMateriales_CyS\"}],\"dbName\":null},\"Materiales_CyS\":{\"fields\":[{\"name\":\"Id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"costo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"stock\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"rela_Mat\",\"kind\":\"object\",\"type\":\"Materiales\",\"relationName\":\"MaterialesToMateriales_CyS\"},{\"name\":\"materiales\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rela_Emp\",\"kind\":\"object\",\"type\":\"Emprendimiento\",\"relationName\":\"EmprendimientoToMateriales_CyS\"},{\"name\":\"emprendimiento\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null},\"Contactos\":{\"fields\":[{\"name\":\"Id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"nombre\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"telefono\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"redes_soc\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"notas_perz\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"propietario\",\"kind\":\"object\",\"type\":\"Usuario\",\"relationName\":\"ContactosToUsuario\"},{\"name\":\"host\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
+config.engineWasm = {
+  getRuntime: async () => require('./query_engine_bg.js'),
+  getQueryEngineWasmModule: async () => {
+    const loader = (await import('#wasm-engine-loader')).default
+    const engine = (await loader).default
+    return engine
   }
 }
+config.compilerWasm = undefined
 
+config.injectableEdgeEnv = () => ({
+  parsed: {
+    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
+  }
+})
+
+if (typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined) {
+  Debug.enable(typeof globalThis !== 'undefined' && globalThis['DEBUG'] || typeof process !== 'undefined' && process.env && process.env.DEBUG || undefined)
+}
+
+const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
-
 Object.assign(exports, Prisma)
+
