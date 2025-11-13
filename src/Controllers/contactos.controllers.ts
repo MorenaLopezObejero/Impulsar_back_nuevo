@@ -1,12 +1,16 @@
 import { error } from "console";
 import { getContactobyHostService, postContactosByUsuarioService} from "../Services/contactos.service";
 import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
+
 
 export const getContactobyHostController = async (req:Request, res:Response) => {
     try{
         const contactosDefault = await getContactobyHostService("HOST")
-        const contactos = await getContactobyHostService(req.body.host)
-        res.json({contactosDefault, contactos})
+        const contactos = await getContactobyHostService(req.host)
+        
+        return res.status(200).json({ message: 'Login exitoso', user: contactos[0], contactosDefault }); 
+
     } catch (err){
         res.status(500).json({error: 'Error al obtener Contactos'});
         throw err;
@@ -22,14 +26,3 @@ export const postContactobyUsuarioController = async (req: Request, res:Response
         throw err;
     }
 }
-
-/*export const postUsuarioController1 = async (req:Request, res:Response) => {
-    try {
-        const usuario = await postUsuarioService(req.body.email, req.body.contasena, req.body.nombreUsu);
-        res.json(usuario);
-    } catch (err) {
-        res.status(500).json({error: 'Error al crear Usuario'});
-        throw err;
-    }
-};
-*/
