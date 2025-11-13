@@ -3,7 +3,7 @@ import { PrismaClient } from '../generated/prisma/client.js';
 const prisma = new PrismaClient()
 
 export const getUsuarioService = async (email: string) => {
-    return await prisma.usuario.findUnique({
+    return await prisma.usuario.findMany({
         where: { email}
     });
 };

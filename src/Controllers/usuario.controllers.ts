@@ -6,9 +6,31 @@ import { Request, Response } from 'express';
 
 export const getUsuarioController = async (req: Request, res: Response) => {
     try{
+        const { email, contasena } = req.body;
+
+        if (!email || !contasena) {
+            return res.status(400).json({ error: 'Todos los campos son obligatorios' });
+        }
+
+        const admin = await getUsuarioService(req.body.email);
+        if (admin.length === 0) {
+            return res.status(400).json({ error: 'Mete info' });
+        }
+
         const usuario = await getUsuarioService(req.body.email);
-        res.json(usuario);
+        const storedPassword = usuario[0].contasena;
+
+        //const token = jwt.sign({ email: usuario[0].email}, process.env.JWT_SECRET as string);
+        //return res.status(201).json({ message: 'Usuario registrado con éxito.', token, user: { email: usuario[0].email}
         
+        if (contasena !== storedPassword) {
+            return res.status(400).json({ error: 'Credenciales inválidas' });
+        }
+
+        // Si la contraseña coincide, generamos el token
+        const token = jwt.sign({ email: usuario[0].email}, process.env.JWT_SECRET as string);
+        return res.status(201).json({ message: 'Iniciaste sesion con éxito.', token, user: { email: usuario[0].email}
+    });
     } catch (err) {
         res.status(500).json({error: 'Error al crear Usuario'});
         throw err;
@@ -25,42 +47,3 @@ export const postUsuarioController1 = async (req:Request, res:Response) => {
         throw err;
     }
 };
-
-/*export const postUsuarioController =async (req:Request, res:Response) => {
-    try{
-        const {email, nombreUsu, contasena} = req.body;
-        if(!email || !nombreUsu || !contasena) {
-            return res.status(400).json({ error: 'Todos los campos son obligatorios' });
-        } 
-        const emailExistente = await 
-    }
-}
-*/
-
-/*
-
-export const registerAdminController = async (req: Request, res: Response) => {
-    try {
-        const { email, name, password } = req.body;
-        if (!email || !name || !password) {
-            return res.status(400).json({ error: 'Todos los campos son obligatorios' });
-        }
-        const emailExistente = await getAdminByEmailService(email);
-        
-        if (emailExistente.length === 0) {
-            const saltRounds = 10;
-            const hashedPassword = await bcrypt.hash(password, saltRounds);
-
-            const newAdmin = await registerAdminService(email, name, hashedPassword)
-            const token = jwt.sign({ email: newAdmin.email, institutionID: newAdmin.institutionID }, process.env.JWT_SECRET as string);
-            return res.status(201).json({ message: 'Usuario registrado con éxito.', token, user: { email: newAdmin.email, name: newAdmin.name  } });
-        }
-        else {
-            return res.status(400).json({ error: 'Este email ya se encuentra en uso' });
-        }
-    } catch (err) {
-        res.status(500).json({ error: 'Error de db' });
-        throw err;
-    }
-}
-*/
