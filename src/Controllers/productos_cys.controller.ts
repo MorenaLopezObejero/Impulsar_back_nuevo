@@ -1,6 +1,7 @@
 import { error } from "console";
 import {getProducto_CySByEmpService } from "../Services/productos_cys.service";
 import { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 
 export const getProducto_CySByEmpController = async (req:Request, res:Response) => {
     try {

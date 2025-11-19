@@ -5,7 +5,7 @@ import authMidd from '../Middleware/auth';
 
 const router = express.Router();
 
-router.get('/contactobyPropietario', getContactobyHostController);
-router.post('/contactobyUsuario', postContactobyUsuarioController);
+router.get('/contactobyPropietario', authMidd.verifyToken, getContactobyHostController);
+router.post('/contactobyUsuario', authMidd.verifyToken, postContactobyUsuarioController);
 
 export default router;
