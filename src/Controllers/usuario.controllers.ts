@@ -2,6 +2,7 @@ import { error } from "console";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { postUsuarioService, getUsuarioService} from "../Services/usuario.service";
+import { getEmprendimientoByUsuario } from "../Services/emprendimiento.service";
 import { Request, Response } from 'express';
 
 export const getUsuarioController = async (req: Request, res: Response) => {
@@ -16,6 +17,8 @@ export const getUsuarioController = async (req: Request, res: Response) => {
         if (admin.length === 0) {
             return res.status(400).json({ error: 'Mete info' });
         }
+        const emprendimiento = await getEmprendimientoByUsuario(admin[0].email)
+        console.log(emprendimiento)
 
         const usuario = await getUsuarioService(req.body.email);
         const storedPassword = usuario[0].contasena;
@@ -28,7 +31,7 @@ export const getUsuarioController = async (req: Request, res: Response) => {
         }
 
         // Si la contraseña coincide, generamos el token
-        const token = jwt.sign({ email: usuario[0].email}, process.env.JWT_SECRET as string);
+        const token = jwt.sign({ email: usuario[0].email, Id_Emprendimiento: emprendimiento[0].Id }, process.env.JWT_SECRET as string);
         return res.status(201).json({ message: 'Iniciaste sesion con éxito.', token, user: { email: usuario[0].email}
     });
     } catch (err) {

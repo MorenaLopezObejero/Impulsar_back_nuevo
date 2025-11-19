@@ -29,8 +29,8 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
 
 try {
     const decoded = jwt.verify(token, jwtSecret as string) as { email: string; Id_Emprendimiento: string };
-    if (!decoded.email ) {
-    return res.status(401).send({ error: 'Token invalido: Usuario sin email' });
+    if (!decoded.email || !decoded.Id_Emprendimiento) {
+    return res.status(401).send({ error: 'Token invalido: Usuario sin email o sin emprendimiento' });
     }
     req.email = decoded.email;
     req.Id_Emprendimiento = decoded.Id_Emprendimiento;
