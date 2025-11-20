@@ -4,6 +4,9 @@ const prisma = new PrismaClient()
 
 export const getProducto_CySByEmpService = async (emprendimiento: number) => {
     return await prisma.productos_CyS.findMany({
-        where: {emprendimiento}
+        where: {emprendimiento},
+        include: {
+            rela_Prod: true,
+        },
     });
 };
